@@ -12,27 +12,29 @@ const Navbar = () => {
   }, [time])
 
   return (
-    <nav className="navbar">
-      <div>
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/match-game-website-logo.png"
-          className="logo"
-          alt="website logo"
-        />
-      </div>
-
-      <div className="game-controls">
-        <p className="score">Score : </p>
-        <div className="time-container">
+    <>
+      <nav className="navbar">
+        <div>
           <img
-            src="https://assets.ccbp.in/frontend/react-js/match-game-timer-img.png"
-            alt="timer"
-            className="timer"
+            src="https://assets.ccbp.in/frontend/react-js/match-game-website-logo.png"
+            className="logo"
+            alt="website logo"
           />
-          <p className="time">{time} sec</p>
         </div>
-      </div>
-    </nav>
+
+        <div className="game-controls">
+          <p className="score">Score : </p>
+          <div className="time-container">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/match-game-timer-img.png"
+              alt="timer"
+              className="timer"
+            />
+            <p className="time">{time} sec</p>
+          </div>
+        </div>
+      </nav>
+    </>
   )
 }
 

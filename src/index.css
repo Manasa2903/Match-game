@@ -84,6 +84,12 @@
   width: 150px;
   height: 30px;
 }
+.trophy {
+  width: 100px;
+  height: 100px;
+}
 .game-over-container {
   background-image: url('https://assets.ccbp.in/frontend/react-js/match-game-score-card-lg-bg.png');
+  height: 350px;
+  width: 300px;
 }

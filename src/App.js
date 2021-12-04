@@ -1,16 +1,12 @@
 import './index.css'
-import {useState, useEffect} from 'react'
+// import {useState, useEffect} from 'react'
 import Tabs from './Components/Tabs'
 import Navbar from './Components/Navbar'
-import ImageItem from './Components/ImageItem'
+// import ImageItem from './Components/ImageItem'
 import RandomImage from './Components/RandomImage'
 
 // These are the lists used in the application. You can move them to any component needed.
-const tabsList = [
-  {tabId: 'FRUIT', displayText: 'Fruits'},
-  {tabId: 'ANIMAL', displayText: 'Animals'},
-  {tabId: 'PLACE', displayText: 'Places'},
-]
+
 const imagesList = [
   {
     id: 'b11ec8ce-35c9-4d67-a7f7-07516d0d8186',
@@ -252,38 +248,12 @@ const imagesList = [
 ]
 
 // Replace your code here
-const App = () => {
-  const [activeTab, setActiveTab] = useState(tabsList[0].tabId)
-  const [filteredList, setFilteredList] = useState([])
-
-  useEffect(() => {
-    const imagesFiltered = imagesList.filter(
-      eachImage => eachImage.category === activeTab,
-    )
-    setFilteredList(imagesFiltered)
-  }, [activeTab])
-
-  return (
-    <div className="matchGame-container">
-      <Navbar />
-      <RandomImage key={imagesList.length} imagesList={imagesList} />
-      <ul className="tabs-container">
-        {tabsList.map(eachTab => (
-          <Tabs
-            key={eachTab.id}
-            tabDetails={eachTab}
-            isActive={activeTab === eachTab.tabId}
-            setActiveTab={setActiveTab}
-          />
-        ))}
-      </ul>
-      <ul className="images-container">
-        {filteredList.map(eachImage => (
-          <ImageItem key={eachImage.id} imageDetails={eachImage} />
-        ))}
-      </ul>
-    </div>
-  )
-}
+const App = () => (
+  <div className="matchGame-container">
+    <Navbar />
+    <RandomImage key={imagesList.length} imagesList={imagesList} />
+    <Tabs key={imagesList} imagesList={imagesList} />
+  </div>
+)
 
 export default App

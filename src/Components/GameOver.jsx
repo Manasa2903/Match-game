@@ -1,4 +1,4 @@
-const gameOver = () => (
+const GameOver = () => (
   <div className="game-over-container">
     <img
       src="https://assets.ccbp.in/frontend/react-js/match-game-trophy.png"
@@ -18,4 +18,4 @@ const gameOver = () => (
   </div>
 )
 
-export default gameOver
+export default GameOver
