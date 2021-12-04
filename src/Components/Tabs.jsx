@@ -1,4 +1,4 @@
-const Tabs = ({tabDetails, setActiveTab, isActive, setRandomImage}) => {
+const Tabs = ({tabDetails, setActiveTab, isActive}) => {
   const {displayText, tabId} = tabDetails
   const activeClass = isActive ? 'active-tab' : 'inactive-tab'
   return (
@@ -6,7 +6,6 @@ const Tabs = ({tabDetails, setActiveTab, isActive, setRandomImage}) => {
       className={activeClass}
       onClick={() => {
         setActiveTab(tabId)
-        setRandomImage(false)
       }}
     >
       {displayText}

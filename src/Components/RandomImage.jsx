@@ -7,6 +7,7 @@ const RandomImage = ({imagesList}) => {
         alt="match"
         className="match-image"
       />
+      <h1>hello</h1>
     </div>
   )
 }

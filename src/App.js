@@ -255,7 +255,6 @@ const imagesList = [
 const App = () => {
   const [activeTab, setActiveTab] = useState(tabsList[0].tabId)
   const [filteredList, setFilteredList] = useState([])
-  const [randomImage, setRandomImage] = useState(true)
 
   useEffect(() => {
     const imagesFiltered = imagesList.filter(
@@ -267,9 +266,7 @@ const App = () => {
   return (
     <div className="matchGame-container">
       <Navbar />
-      {randomImage && (
-        <RandomImage key={imagesList.length} imagesList={imagesList} />
-      )}
+      <RandomImage key={imagesList.length} imagesList={imagesList} />
       <ul className="tabs-container">
         {tabsList.map(eachTab => (
           <Tabs
@@ -277,7 +274,6 @@ const App = () => {
             tabDetails={eachTab}
             isActive={activeTab === eachTab.tabId}
             setActiveTab={setActiveTab}
-            setRandomImage={setRandomImage}
           />
         ))}
       </ul>
