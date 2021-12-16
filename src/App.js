@@ -1,9 +1,9 @@
 import './index.css'
-// import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import Tabs from './Components/Tabs'
 import Navbar from './Components/Navbar'
-// import ImageItem from './Components/ImageItem'
-import RandomImage from './Components/RandomImage'
+import ImageItem from './Components/ImageItem'
+import GameOver from './Components/GameOver'
 
 // These are the lists used in the application. You can move them to any component needed.
 
@@ -246,14 +246,95 @@ const imagesList = [
     category: 'FRUIT',
   },
 ]
+const tabsList = [
+  {tabId: 'FRUIT', displayText: 'Fruits'},
+  {tabId: 'ANIMAL', displayText: 'Animals'},
+  {tabId: 'PLACE', displayText: 'Places'},
+]
 
 // Replace your code here
-const App = () => (
-  <div className="matchGame-container">
-    <Navbar />
-    <RandomImage key={imagesList.length} imagesList={imagesList} />
-    <Tabs key={imagesList} imagesList={imagesList} />
-  </div>
-)
+const App = () => {
+  const [score, setScore] = useState(0)
+  const [randomImage, setRandomImage] = useState('')
+  const [isRandomImage, setIsRandomImage] = useState(true)
+  const [filteredList, setFilteredList] = useState([])
+  const [activeTab, setActiveTab] = useState(tabsList[0].tabId)
+  const [time, setTime] = useState(60)
+  const [gameRunning, setGameRunning] = useState(true)
+
+  useEffect(() => {
+    const imagesFiltered = imagesList.filter(
+      eachImage => eachImage.category === activeTab,
+    )
+    setFilteredList(imagesFiltered)
+  }, [activeTab])
+
+  const checkImage = id => {
+    const isSame = randomImage.id === id
+    if (isSame) {
+      setScore(prevState => prevState + 1)
+    } else {
+      setGameRunning(false)
+    }
+  }
+
+  const generateRandomImage = () => {
+    const randomIndex = Math.ceil(Math.random() * (imagesList.length - 1))
+    setRandomImage(imagesList[randomIndex])
+    setIsRandomImage(false)
+  }
+
+  return (
+    <>
+      {gameRunning ? (
+        <div className="matchGame-container">
+          <Navbar
+            score={score}
+            time={time}
+            setTime={setTime}
+            setGameRunning={setGameRunning}
+          />
+          {isRandomImage && generateRandomImage()}
+          <div className="matchImage-container">
+            <img
+              src={randomImage.imageUrl}
+              alt="match"
+              className="match-image"
+            />
+          </div>
+          <ul className="tabs-container">
+            {tabsList.map(eachTab => (
+              <Tabs
+                key={eachTab.id}
+                tabsList={eachTab}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
+            ))}
+          </ul>
+
+          <ul className="images-container">
+            {filteredList.map(eachImage => (
+              <ImageItem
+                key={eachImage.id}
+                imageDetails={eachImage}
+                checkImage={checkImage}
+                setIsRandomImage={setIsRandomImage}
+              />
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <GameOver
+          score={score}
+          setScore={setScore}
+          setGameRunning={setGameRunning}
+          setTime={setTime}
+          setIsRandomImage={setIsRandomImage}
+        />
+      )}
+    </>
+  )
+}
 
 export default App

@@ -1,4 +1,10 @@
-const GameOver = () => (
+const GameOver = ({
+  score,
+  setScore,
+  setGameRunning,
+  setTime,
+  setIsRandomImage,
+}) => (
   <div className="game-over-container">
     <img
       src="https://assets.ccbp.in/frontend/react-js/match-game-trophy.png"
@@ -6,14 +12,22 @@ const GameOver = () => (
       className="trophy"
     />
     <h1>YOUR SCORE</h1>
-    <p>0</p>
-    <button type="button">
+    <p>{score}</p>
+    <button
+      type="button"
+      onClick={() => {
+        setGameRunning(true)
+        setIsRandomImage(true)
+        setScore(0)
+        setTime(60)
+      }}
+    >
       <img
         src="https://assets.ccbp.in/frontend/react-js/match-game-play-again-img.png"
         alt="reset"
         className="reset"
       />
-      Play Again
+      PLAY AGAIN
     </button>
   </div>
 )
